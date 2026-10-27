@@ -8,7 +8,12 @@ import headerNavLinks from '@/data/headerNavLinks'
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const navRef = useRef(null)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const onToggleNav = () => {
     setNavShow((status) => {
@@ -25,6 +30,10 @@ const MobileNav = () => {
   useEffect(() => {
     return clearAllBodyScrollLocks
   })
+
+  if (!mounted) {
+    return <button aria-label="Toggle Menu" className="sm:hidden h-8 w-8" />
+  }
 
   return (
     <>
